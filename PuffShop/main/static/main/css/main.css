@@ -22,7 +22,7 @@ body {
 }
 
 .header .navbar-nav .nav-link:hover {
-    color: #ffc107;
+    color: #white;
 }
 
 .header .form-inline .form-control {
