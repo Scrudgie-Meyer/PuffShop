@@ -5,17 +5,25 @@ from .models import Category, Item
 def index(request):
     categories = Category.objects.all()
 
-    data = {
+    context = {
         'categories': categories,
     }
 
-    return render(request, 'main/index.html', data)
+    return render(request, 'main/index.html', context)
 
 def category_items(request, pk):
     category = get_object_or_404(Category, id=pk)
     items = Item.objects.filter(category=category)
     context = {
-        'category': category,
         'items': items
     }
     return render(request, 'main/category_items.html', context)
+
+def detail(request, pk):
+
+    items = get_object_or_404(Item, id=pk)
+
+    context = {
+        'item': items
+    }
+    return render(request, 'main/item_detail.html', context)

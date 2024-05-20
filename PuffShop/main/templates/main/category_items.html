@@ -57,16 +57,18 @@
                 <div class="row">
                     {% for item in items %}
                         <div class="col-md-4">
-                            <div class="card mb-4">
-                                <div class="card-img-container">
-                                    <img src="{{ item.image_urls.0 }}" class="card-img-top" alt="Product 1">
+                            <a href="{% url 'item_detail' item.id %}" class="category-card-link">
+                                <div class="card mb-4">
+                                    <div class="card-img-container">
+                                        <img src="{{ item.image_urls.0 }}" class="card-img-top" alt="Product 1">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ item.name }}</h5>
+                                        <p class="card-text">${{ item.price }}</p>
+                                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ item.name }}</h5>
-                                    <p class="card-text">${{ item.price }}</p>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     {% endfor %}
                 </div>

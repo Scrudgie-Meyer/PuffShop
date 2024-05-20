@@ -142,12 +142,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top:5px;
 }
 
 .card-img-container img {
-    width: auto;
+    width: 100%;
     height: 100%;
     display: block;
+    object-fit: contain;
 }
 
 .card {
@@ -178,6 +180,8 @@ h2, h4, h5 {
 aside h4 {
     margin-bottom: 20px;
 }
+
+/*Footer*/
 
 .footer {
     background-color: #343a40;
@@ -221,3 +225,54 @@ aside h4 {
     margin-top: 30px;
 }
 
+/* Additional CSS */
+.product-description {
+    margin-top: 20px;
+}
+
+.carousel-item img {
+    height: 500px;
+    object-fit: contain;
+    width: 100%;
+    background: white;
+}
+.carousel-inner {
+    height: 500px;
+    background-color: #f8f9fa;
+}
+.carousel-thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.carousel-thumbnails img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+.carousel-thumbnails img:hover {
+    border: 2px solid #007bff;
+}
+.buy-button {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+.buy-button:hover {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color:  #343a40;
+    background-size: 100%, 100%;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color:  #ffc107;
+    background-size: 100%, 100%;
+}
