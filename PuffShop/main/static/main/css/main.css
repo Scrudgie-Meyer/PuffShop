@@ -1,0 +1,128 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.header {
+    background-color: #343a40;
+    color: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 1000;
+    position: relative;
+}
+
+.header .navbar-brand {
+    color: #fff;
+}
+
+.header .navbar-nav .nav-link {
+    color: #fff;
+    font-size: 16px;
+    padding-right: 20px;
+}
+
+.header .navbar-nav .nav-link:hover {
+    color: #ffc107;
+}
+
+.header .form-inline .form-control {
+    width: 250px;
+}
+
+.header .form-inline .btn-outline-success {
+    margin-left: 10px;
+    color: #fff;
+    border-color: #ffc107;
+}
+
+.header .form-inline .btn-outline-success:hover {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.header .btn-outline-secondary {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    border-color: #ffc107;
+}
+
+.header .btn-outline-secondary:hover {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.header .btn-outline-secondary .fa-shopping-cart {
+    margin-right: 5px;
+}
+
+.welcome-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.categories {
+    background-color: #f1f1f1;
+    padding: 40px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.categories .category-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.categories .category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.category-card img {
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+}
+
+.card {
+    border-radius: 5px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: #343a40;
+    border-color: #343a40;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+h2, h4, h5 {
+    color: #343a40;
+}
+
+aside h4 {
+    margin-bottom: 20px;
+}
