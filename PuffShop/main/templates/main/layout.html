@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="{% url 'index'%}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Products</a>
@@ -49,6 +49,49 @@
 
     {% block main %}
     {% endblock %}
+
+        <!-- Footer -->
+    <footer class="footer bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>About PuffShop</h5>
+                    <p>PuffShop is your one-stop shop for all your furniture needs. We offer a wide range of sofas, chairs, tables, and beds to suit any home.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>Email: info@puffshop.com</li>
+                        <li>Phone: (123) 456-7890</li>
+                        <li>Address: 123 Furniture St, Home City, HS 45678</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Useful Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'index'%}" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Products</a></li>
+                        <li><a href="#" class="text-white">About Us</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white"><i class="fa fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#" class="text-white"><i class="fa fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#" class="text-white"><i class="fa fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#" class="text-white"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <p>&copy; 2024 PuffShop. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
