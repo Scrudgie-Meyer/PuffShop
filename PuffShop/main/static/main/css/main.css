@@ -276,3 +276,65 @@ aside h4 {
     background-color:  #ffc107;
     background-size: 100%, 100%;
 }
+
+/*Filter*/
+.form-group {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section {
+    margin-bottom: 15px;
+
+}
+
+.filter-label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.filter-label::before {
+    content: '\25B6'; /* Right-pointing triangle */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+}
+
+.filter-label.open::before {
+    transform: translateY(-50%) rotate(90deg); /* Down-pointing triangle */
+}
+
+.form-check {
+    margin-left: 20px;
+    display: none;
+
+}
+
+.form-check-label {
+    display: block;
+    position: relative;
+    padding-left: 15px;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.form-check-input {
+    position: absolute;
+    margin-top: 0.5rem;
+    margin-left: -1.5rem;
+
+}
+
+
+

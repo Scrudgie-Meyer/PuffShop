@@ -20,6 +20,7 @@ class Item(models.Model):
     description = models.TextField('Description')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='items', blank=True, null=True)
     image_urls = models.JSONField('Image URLs', default=list)
+    attributes = models.JSONField('Attributes', default=dict)
 
     def __str__(self):
         return self.name
