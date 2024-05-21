@@ -27,3 +27,12 @@ def detail(request, pk):
         'item': items
     }
     return render(request, 'main/item_detail.html', context)
+
+def cart(request):
+    return render(request, 'main/cart.html')
+
+def about_us(request):
+    return render(request, 'main/about_us.html')
+
+def contact(request):
+    return render(request, 'main/contact.html')
