@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-J0HW5lq/mR/ckzYsEAdeBOPxu3p4k+7R3RZ9sU0vzF9P+u7DZzgKL/YQoG2qQxh/SPz/ZA5JXRI4lQGuIY8t0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="{% url 'index'%}">
+                <img src="https://i.imgur.com/yHZr4Kr.png" alt="PuffShop Logo" style="width: 50px; border-radius: 50%;" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index'%}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about_us'%}">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact'%}">Contact</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <a href="{% url 'cart'%}" class="btn btn-outline-secondary ml-3">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                </a>
+            </div>
+        </nav>
+    </header>
+
+
+    {% block main %}
+    {% endblock %}
+
+        <!-- Footer -->
+    <footer class="footer bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>About PuffShop</h5>
+                    <p>PuffShop is your one-stop shop for all your furniture needs. We offer a wide range of sofas, chairs, tables, and beds to suit any home.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>Email: info@puffshop.com</li>
+                        <li>Phone: (123) 456-7890</li>
+                        <li>Address: 123 Furniture St, Home City, HS 45678</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Useful Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'index'%}" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">Products</a></li>
+                        <li><a href="{% url 'about_us'%}" class="text-white">About Us</a></li>
+                        <li><a href="{% url 'contact'%}" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.facebook.com/" class="text-white"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="https://x.com/" class="text-white"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="https://www.instagram.com/" class="text-white"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/" class="text-white"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col text-center">
+                    <p>&copy; 2024 PuffShop. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+      <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

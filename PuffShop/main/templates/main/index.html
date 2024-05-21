@@ -1,0 +1,36 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block main %}
+    {% load static %}
+   <!-- Welcome Banner -->
+    <section class="welcome-banner">
+        <div class="welcome-text">
+            <h1>Welcome to PuffShop</h1>
+        </div>
+        <img src="https://cdn.shopify.com/s/files/1/0549/5806/3713/files/organic_modern_furniture.jpg?v=1704830139" alt="Welcome to PuffShop" class="img-fluid">
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories py-5">
+        <div class="container">
+            <h2 class="mb-4 text-center">Shop by Category</h2>
+            <div class="row">
+                {% for val in categories %}
+                    <div class="col-md-3">
+                        <a href="{% url 'category_items' val.id %}" class="category-card-link">
+                            <div class="category-card">
+                                <div class="category-img-container">
+                                    <img src="{{ val.image_url }}" alt="{{ val.name }}" class="img-fluid">
+                                </div>
+                                <h5 class="mt-2 text-center">{{ val.name }}</h5>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
