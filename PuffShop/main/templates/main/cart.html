@@ -43,20 +43,36 @@
                     <label for="phone">Phone:</label>
                     <input type="text" id="phone" name="phone" class="form-control" style="width: 200px" placeholder="e.g., 0504567890" pattern="[0-9]{10}" required>
                 </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" class="form-control" style="width: 400px">
+                </div>
                 <button type="submit" id="placeOrder" class="btn btn-primary">Place Order</button>
             </form>
         {% else %}
             <p>Your cart is empty.</p>
         {% endif %}
+
+        <hr>
+
+        {% if orders_list %}
+            <h2>Orders</h2>
+            <ul>
+                {% for order_id in orders_list %}
+                    <li><a href="{% url 'order_details' order_id %}">Order {{ order_id }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </main>
 
 
-<script>
- document.getElementById('placeOrder').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default form submission
-    document.getElementById('orderForm').submit(); // Submit the form via JavaScript
-});
-</script>
+    <script>
+        document.getElementById('placeOrder').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            document.getElementById('orderForm').submit(); // Submit the form via JavaScript
+        });
+    </script>
 {% endblock %}
+
 
 
