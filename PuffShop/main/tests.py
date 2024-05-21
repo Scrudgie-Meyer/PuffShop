@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from .models import Category, Item
+from .models import Category, Item, Order
 
 class IndexViewTest(TestCase):
     def test_index_view(self):
@@ -18,7 +18,7 @@ class AddToCartTest(TestCase):
 
     def test_add_to_cart(self):
         response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 302)  # Перенаправлення
+        self.assertEqual(response.status_code, 302)
 
 
 
