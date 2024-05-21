@@ -4,16 +4,51 @@
 
 {% block main %}
     <main class="container my-5">
-        <div class="col-md-3">
-                    <h5>Follow Us</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="https://www.facebook.com/" class="text-black"><i class="fab fa-facebook"></i> Facebook</a></li>
-                        <li><a href="https://x.com/" class="text-black"><i class="fab fa-twitter"></i> Twitter</a></li>
-                        <li><a href="https://www.instagram.com/" class="text-black"><i class="fab fa-instagram"></i> Instagram</a></li>
-                        <li><a href="https://www.linkedin.com/" class="text-black"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                    </ul>
-        </div>
+        <h1>Cart</h1>
+        {% if cart %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item_id, item_data in cart.items %}
+                        <tr>
+                            <td>{{ item_data.name }}</td>
+                            <td>${{ item_data.price }}</td>
+                            <td>{{ item_data.quantity }}</td>
+                            <td>
+                                <form action="{% url 'delete_from_cart' item_id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p>Total Price: ${{ total_price|floatformat:2 }}</p>
+            <hr>
+            <form action="{#}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" style="width: 200px" pattern="[A-Za-z\s]+" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" name="phone" class="form-control" style="width: 200px" placeholder="e.g., 050456789" pattern="[0-9]{10}" required>
+                </div>
+                <button type="submit" class="btn btn-primary" >Place Order</button>
+            </form>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
     </main>
-
-
 {% endblock %}
+
+
