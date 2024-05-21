@@ -74,3 +74,26 @@ def delete_from_cart(request, pk):
 
     request.session['cart'] = cart
     return redirect('cart')
+
+
+def place_order(request):
+    name = request.POST.get('name')
+    phone = request.POST.get('phone')
+    cart = request.session.get('cart', {})
+
+
+
+    request.session['cart'] = {}
+
+    return redirect('cart')
+
+def cancel_order(request):
+    cart = request.session.get('cart', {})
+
+    if str(pk) in cart:
+        cart[str(pk)]['quantity'] -= quantity
+        if cart[str(pk)]['quantity'] <= 0:
+            del cart[str(pk)]
+
+    request.session['cart'] = cart
+    return redirect('cart')

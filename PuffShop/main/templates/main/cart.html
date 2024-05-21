@@ -33,7 +33,7 @@
             </table>
             <p>Total Price: ${{ total_price|floatformat:2 }}</p>
             <hr>
-            <form action="{#}" method="post">
+            <form id="orderForm" action="{% url 'place_order' %}" method="post">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="name">Name:</label>
@@ -41,14 +41,22 @@
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone:</label>
-                    <input type="text" id="phone" name="phone" class="form-control" style="width: 200px" placeholder="e.g., 050456789" pattern="[0-9]{10}" required>
+                    <input type="text" id="phone" name="phone" class="form-control" style="width: 200px" placeholder="e.g., 0504567890" pattern="[0-9]{10}" required>
                 </div>
-                <button type="submit" class="btn btn-primary" >Place Order</button>
+                <button type="submit" id="placeOrder" class="btn btn-primary">Place Order</button>
             </form>
         {% else %}
             <p>Your cart is empty.</p>
         {% endif %}
     </main>
+
+
+<script>
+ document.getElementById('placeOrder').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    document.getElementById('orderForm').submit(); // Submit the form via JavaScript
+});
+</script>
 {% endblock %}
 
 
