@@ -27,4 +27,4 @@ jobs:
         pip install -r PuffShop/requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test main
+        python PuffShop/manage.py test main
