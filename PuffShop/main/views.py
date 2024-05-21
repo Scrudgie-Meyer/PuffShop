@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Category, Item
+from .models import Category, Item, OrderItem, Order
+from django.db import transaction
 
 
 # Create your views here.
@@ -89,7 +90,9 @@ def contact(request):
 def cart(request):
     cart = request.session.get('cart', {})
     total_price = sum(item['price'] * item['quantity'] for item in cart.values())
-    return render(request, 'main/cart.html', {'cart': cart, 'total_price': total_price})
+    orders_list = request.session.get('orders', [])
+
+    return render(request, 'main/cart.html', {'cart': cart, 'total_price': total_price, 'orders_list': orders_list})
 
 def add_to_cart(request, pk):
     item = get_object_or_404(Item, id=pk)
@@ -123,11 +126,51 @@ def delete_from_cart(request, pk):
     return redirect('cart')
 
 def place_order(request):
+    # Отримуємо дані з форми
     name = request.POST.get('name')
     phone = request.POST.get('phone')
+    address = request.POST.get('address')
     cart = request.session.get('cart', {})
 
+    if not cart:
+        return redirect('cart')
 
+    # Створюємо нове замовлення
+    order = Order.objects.create(
+        name=name,
+        phone=phone,
+        address=address,
+        status='pending'
+    )
+
+    # Використовуємо транзакцію для гарантії цілісності даних
+    with transaction.atomic():
+        for item_id, item_data in cart.items():
+            quantity = item_data['quantity']
+            # Отримуємо товар
+            item = get_object_or_404(Item, id=item_id)
+
+            if item.quantity < quantity:
+                # Якщо кількість товару менше ніж замовлена, відкатимо транзакцію
+                raise ValueError(f"Not enough quantity for item {item.name}")
+
+            # Віднімаємо кількість товару з інвентаря
+            item.quantity -= quantity
+            item.save()
+
+            # Створюємо OrderItem для кожного товару в корзині
+            order_item = OrderItem.objects.create(
+                order=order,
+                item=item,
+                name=item.name,
+                price=item.price,
+                quantity=quantity,
+                description=item.description
+            )
+
+    orders_list = request.session.get('orders', [])
+    orders_list.append(order.id)
+    request.session['orders'] = orders_list
 
     request.session['cart'] = {}
 
@@ -143,3 +186,9 @@ def cancel_order(request):
 
     request.session['cart'] = cart
     return redirect('cart')
+
+def order_details(request, pk):
+    order = get_object_or_404(Order, id=pk)
+    order_items = OrderItem.objects.filter(order=order)
+
+    return render(request, 'main/order_details.html', {'order': order, 'order_items': order_items})

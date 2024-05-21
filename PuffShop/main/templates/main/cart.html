@@ -48,15 +48,27 @@
         {% else %}
             <p>Your cart is empty.</p>
         {% endif %}
+
+        <hr>
+
+        {% if orders_list %}
+            <h2>Orders</h2>
+            <ul>
+                {% for order_id in orders_list %}
+                    <li><a href="{% url 'order_details' order_id %}">Order {{ order_id }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </main>
 
 
-<script>
- document.getElementById('placeOrder').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default form submission
-    document.getElementById('orderForm').submit(); // Submit the form via JavaScript
-});
-</script>
+    <script>
+        document.getElementById('placeOrder').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            document.getElementById('orderForm').submit(); // Submit the form via JavaScript
+        });
+    </script>
 {% endblock %}
+
 
 

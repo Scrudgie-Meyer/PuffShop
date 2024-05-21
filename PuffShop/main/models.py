@@ -14,10 +14,10 @@ class Category(models.Model):
 
 # Модель товару
 class Item(models.Model):
-    name = models.CharField('Name', max_length=50)
+    name = models.CharField('Name', max_length=50, null=True)
     price = models.DecimalField('Price', max_digits=10, decimal_places=2)
-    quantity = models.IntegerField('Quantity')
-    description = models.TextField('Description')
+    quantity = models.IntegerField('Quantity', null=True)
+    description = models.TextField('Description', null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='items', blank=True, null=True)
     image_urls = models.JSONField('Image URLs', default=list)
     attributes = models.JSONField('Attributes', default=dict)
@@ -27,3 +27,32 @@ class Item(models.Model):
 
     def get_absolute_url(self):
         return f'/{self.id}'
+
+class Order(models.Model):
+    name = models.CharField('Name', max_length=50)
+    phone = models.CharField('Phone', max_length=20, blank=True, null=True)
+    address = models.CharField('Address', max_length=255, blank=True, null=True)
+    items = models.ManyToManyField(Item, through='OrderItem')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    status = models.CharField('Status', max_length=20, choices=[
+        ('pending', 'Pending'),
+        ('processing', 'Processing'),
+        ('completed', 'Completed'),
+        ('canceled', 'Canceled')
+    ])
+
+    def __str__(self):
+        return f'Order {self.id} by {self.phone}'
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')  # Зв'язок із замовленням
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)  # Зв'язок із товаром
+    name = models.CharField('Name', max_length=50, null=True)
+    price = models.DecimalField('Price', max_digits=10, decimal_places=2)
+    quantity = models.IntegerField('Quantity', null=True)
+    description = models.TextField('Description', null=True)
+
+    def __str__(self):
+        return f'{self.quantity} x {self.name}'
