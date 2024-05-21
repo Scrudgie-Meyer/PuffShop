@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+rom django.shortcuts import render, get_object_or_404
 from .models import Category, Item
 
 
@@ -88,26 +88,3 @@ def about_us(request):
 
 def contact(request):
     return render(request, 'main/contact.html')
-
-
-def place_order(request):
-    name = request.POST.get('name')
-    phone = request.POST.get('phone')
-    cart = request.session.get('cart', {})
-
-
-
-    request.session['cart'] = {}
-
-    return redirect('cart')
-
-def cancel_order(request):
-    cart = request.session.get('cart', {})
-
-    if str(pk) in cart:
-        cart[str(pk)]['quantity'] -= quantity
-        if cart[str(pk)]['quantity'] <= 0:
-            del cart[str(pk)]
-
-    request.session['cart'] = cart
-    return redirect('cart')
