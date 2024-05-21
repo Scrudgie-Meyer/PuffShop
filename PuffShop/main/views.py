@@ -31,6 +31,9 @@ def detail(request, pk):
 def cart(request):
     return render(request, 'main/cart.html')
 
+def items(request):
+    return render(request, 'main/items.html')
+
 def about_us(request):
     return render(request, 'main/about_us.html')
 

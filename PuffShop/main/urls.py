@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('items', views.items, name='items'),
     path('about_us', views.about_us, name='about_us'),
     path('contact', views.contact, name='contact'),
     path('cart', views.cart, name='cart'), #Concatanate from user session
