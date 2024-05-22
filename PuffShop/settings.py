@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('APP_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['puff-shop-0ad5d8bc0b50.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['puff-shop-0ad5d8bc0b50.herokuapp.com', 'localhost', '127.0.0.1']
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
