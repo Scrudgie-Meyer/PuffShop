@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import sys
 import posixpath
-import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
