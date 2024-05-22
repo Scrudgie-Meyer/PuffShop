@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import sys
 import posixpath
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -33,14 +34,15 @@ ALLOWED_HOSTS = ['puff-shop-0ad5d8bc0b50.herokuapp.com', 'localhost', '127.0.0.1
 
 # Application references
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',  # Add this before 'django.contrib.staticfiles'
-    'django.contrib.staticfiles',     # Include this to manage static files
     'main',
+    # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',  # Add this before 'django.contrib.staticfiles'
 ]
 
 # Middleware framework
@@ -115,7 +117,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Whitenoise settings for static files
+# Add these settings for Whitenoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Extra places for collectstatic to find static files.
