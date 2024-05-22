@@ -16,8 +16,8 @@ class Category(models.Model):
 class Item(models.Model):
     name = models.CharField('Name', max_length=50, null=True)
     price = models.DecimalField('Price', max_digits=10, decimal_places=2)
-    quantity = models.IntegerField('Quantity', null=True)
-    description = models.TextField('Description', null=True)
+    quantity = models.IntegerField('Quantity', default=0)
+    description = models.TextField('Description', default='Description')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='items', blank=True, null=True)
     image_urls = models.JSONField('Image URLs', default=list)
     attributes = models.JSONField('Attributes', default=dict)
@@ -30,7 +30,7 @@ class Item(models.Model):
 
 class Order(models.Model):
     name = models.CharField('Name', max_length=50)
-    phone = models.CharField('Phone', max_length=20, blank=True, null=True)
+    phone = models.CharField('Phone', max_length=20, blank=True)
     address = models.CharField('Address', max_length=255, blank=True, null=True)
     items = models.ManyToManyField(Item, through='OrderItem')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -49,9 +49,9 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')  # Зв'язок із замовленням
     item = models.ForeignKey(Item, on_delete=models.CASCADE)  # Зв'язок із товаром
-    name = models.CharField('Name', max_length=50, null=True)
+    name = models.CharField('Name', max_length=50)
     price = models.DecimalField('Price', max_digits=10, decimal_places=2)
-    quantity = models.IntegerField('Quantity', null=True)
+    quantity = models.IntegerField('Quantity', default=0)
     description = models.TextField('Description', null=True)
 
     def __str__(self):
