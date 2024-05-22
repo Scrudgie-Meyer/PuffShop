@@ -1,4 +1,4 @@
 django>=3.2.14
 gunicorn==22.0.0
 python-dotenv==1.0.1
-dj_database_url
+whitenoise
