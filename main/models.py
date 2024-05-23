@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 # Модель категорії
 class Category(models.Model):
@@ -17,7 +18,7 @@ class Item(models.Model):
     name = models.CharField('Name', max_length=50, null=True)
     price = models.DecimalField('Price', max_digits=10, decimal_places=2)
     quantity = models.IntegerField('Quantity', default=0)
-    description = models.TextField('Description', default='Description')
+    description = RichTextField('Description', default='Description')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='items', blank=True, null=True)
     image_urls = models.JSONField('Image URLs', default=list)
     attributes = models.JSONField('Attributes', default=dict)

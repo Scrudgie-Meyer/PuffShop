@@ -34,6 +34,8 @@ ALLOWED_HOSTS = ['puff-shop-0ad5d8bc0b50.herokuapp.com', 'localhost', '127.0.0.1
 # Application references
 INSTALLED_APPS = [
     'main',
+    'ckeditor',
+    'ckeditor_uploader',
     # Add your apps here to enable them
     'django.contrib.admin',
     'django.contrib.auth',
@@ -123,3 +125,5 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
