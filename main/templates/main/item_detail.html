@@ -58,6 +58,16 @@
                     </div>
                 </div>
                <a href="#" class="btn btn-primary" id="addToCart">Add to Cart</a>
+
+                <!-- Attributes Section -->
+                <div class="product-attributes mt-4">
+                    <h4>Сharacteristics</h4>
+                    <ul class="list-unstyled">
+                        {% for key, value in item.attributes.items %}
+                            <li><strong>{{ key }}:</strong> {{ value }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="row product-description">

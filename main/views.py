@@ -12,26 +12,6 @@ def index(request):
     }
     return render(request, 'main/index.html', context)
 
-def category_items(request, pk):
-    category = get_object_or_404(Category, id=pk)
-    attributes = get_attributes(Item.objects.filter(category=category).values_list('attributes', flat=True))
-
-    # Отримуємо параметри фільтрації з GET запитів
-    filters = {}
-    for key, value in request.GET.items():
-        filters[f'attributes__{key}'] = value
-
-    if filters:
-        items = Item.objects.filter(category=category).filter(**filters)
-    else:
-        items = Item.objects.filter(category=category)
-
-    context = {
-        'items': items,
-        'attributes': attributes,
-        'selected_filters': request.GET,
-    }
-    return render(request, 'main/category_items.html', context)
 
 
 def detail(request, pk):
@@ -58,27 +38,35 @@ def get_attributes(attributes):
 
     return all_attributes
 
-
-def item_full_list(request):
-    attributes = get_attributes(Item.objects.values_list('attributes', flat=True))
-
+def item_list(request):
     # Отримуємо параметри фільтрації з GET запитів
     filters = {}
+    category_filter = request.GET.get('category')
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+
+    if category_filter and category_filter != 'All':
+        filters['category__pk'] = category_filter
+
+    if min_price:
+        filters['price__gte'] = min_price
+    if max_price:
+        filters['price__lte'] = max_price
+
     for key, value in request.GET.items():
-        filters[f'attributes__{key}'] = value
+        if key not in ['category', 'min_price', 'max_price']:
+            filters[f'attributes__{key}'] = value
 
-    if filters:
-        items = Item.objects.filter(**filters)
-    else:
-        items = Item.objects.all()
-
+    items = Item.objects.filter(**filters)
+    attributes = get_attributes(items.values_list('attributes', flat=True))
+    categories = Category.objects.all()
     context = {
         'items': items,
         'attributes': attributes,
         'selected_filters': request.GET,
+        'categories': categories
     }
-    return render(request, 'main/item_full_list.html', context)
-
+    return render(request, 'main/item_list.html', context)
 
 def about_us(request):
     return render(request, 'main/about_us.html')

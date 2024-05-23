@@ -19,7 +19,7 @@
             <div class="row">
                 {% for val in categories %}
                     <div class="col-md-3">
-                        <a href="{% url 'category_items' val.id %}" class="category-card-link">
+                        <a href="{% url 'item_list' %}?category={{ val.pk }}" class="category-card-link">
                             <div class="category-card">
                                 <div class="category-img-container">
                                     <img src="{{ val.image_url }}" alt="{{ val.name }}" class="img-fluid">

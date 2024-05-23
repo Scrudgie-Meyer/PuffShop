@@ -1,0 +1,143 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Cart {% endblock %}
+
+{% block main %}
+
+     <main class="container my-5">
+         <div class="row">
+
+           <!-- Filter Section -->
+             <aside class="col-md-3 mb-4">
+                <h4>Filters</h4>
+                <form id="filterForm" method="get" action=".">
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select class="form-control" id="category" name="category" onchange="submitForm()">
+                            <option value="All">All</option>
+                            {% for val in categories %}
+                                <option value="{{ val.pk }}" {% if val.pk|stringformat:"s" == selected_filters.category %}selected{% endif %}>{{ val.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="min_price">Min Price</label>
+                        <input type="number" class="form-control" id="min_price" name="min_price" min="0" value="{{ selected_filters.min_price }}" onchange="submitForm()">
+                    </div>
+                    <div class="form-group">
+                        <label for="max_price">Max Price</label>
+                        <input type="number" class="form-control" id="max_price" name="max_price" min="0" value="{{ selected_filters.max_price }}" onchange="submitForm()">
+                    </div>
+                    <div class="form-group">
+                        {% for attr, values in attributes.items %}
+                            <div class="filter-section">
+                                <label class="filter-label" onclick="toggleFilter('{{ attr }}')">{{ attr }}</label>
+                                <div class="form-check" id="filter-{{ attr }}">
+                                    {% for value in values %}
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" name="{{ attr }}" value="{{ value }}" {% if value in selected_filters.values %}checked{% endif %} onchange="submitForm()">
+                                            {{ value }}
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </aside>
+{#            <!-- Filter Section -->#}
+{#            <aside class="col-md-3 mb-4">#}
+{#                <h4>Filters</h4>#}
+{#                <form>#}
+{#                    <div class="form-group">#}
+{#                        <label for="category">Category</label>#}
+{#                        <select class="form-control" id="category">#}
+{##}
+{#                            <option>All</option>#}
+{#                            {% for val in categories %}#}
+{#                                <option >{{ val.name }}</option>#}
+{#                            {% endfor %}#}
+{##}
+{#                        </select>#}
+{#                    </div>#}
+{#                    <div class="form-group">#}
+{#                        <label for="priceRange">Price Range</label>#}
+{#                        <input type="range" class="form-control-range" id="priceRange" min="0" max="1000" step="50">#}
+{#                        <div class="d-flex justify-content-between">#}
+{#                            <span>$0</span>#}
+{#                            <span>$1000</span>#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                        <div class="form-group">#}
+{#                            <form method="get" action=".">#}
+{#                                {% for attr, values in attributes.items %}#}
+{#                                    <div class="filter-section">#}
+{#                                        <label class="filter-label" onclick="toggleFilter('{{ attr }}')">{{ attr }}</label>#}
+{#                                        <div class="form-check" id="filter-{{ attr }}">#}
+{#                                            {% for value in values %}#}
+{#                                                <label class="form-check-label">#}
+{#                                                    <input type="checkbox" class="form-check-input" name="{{ attr }}" value="{{ value }}" {% if value in selected_filters.values %}checked{% endif %}>#}
+{#                                                    {{ value }}#}
+{#                                                </label>#}
+{#                                            {% endfor %}#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
+{#                                <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>#}
+{#                            </form>#}
+{#                        </div>#}
+{#                </form>#}
+{#            </aside>#}
+            <!-- Product Catalog -->
+            <div class="col-md-9">
+                <h2 class="mb-4">Product Catalog</h2>
+                <div class="row">
+                    {% for item in items %}
+                        <div class="col-md-4">
+                            <a href="{% url 'item_detail' item.id %}" class="category-card-link">
+                                <div class="card mb-4">
+                                    <div class="card-img-container">
+                                        <img src="{{ item.image_urls.0 }}" class="card-img-top" alt="Product 1">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ item.name }}</h5>
+                                        <p class="card-text">${{ item.price }}</p>
+                                        <a href="{% url 'add_to_cart' item.id %}" class="btn btn-primary">Add to Cart</a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleFilter(attr) {
+            var element = document.getElementById('filter-' + attr);
+            var label = document.querySelector('[onclick="toggleFilter(\'' + attr + '\')"]');
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+                label.classList.add('open');
+            } else {
+                element.style.display = "none";
+                label.classList.remove('open');
+            }
+        }
+
+        // Функція для автоматичної відправки форми
+        function submitForm() {
+            document.getElementById('filterForm').submit();
+        }
+
+        // Закриття всіх списків за замовчуванням
+        document.addEventListener('DOMContentLoaded', function() {
+            var filters = document.querySelectorAll('.form-check');
+            filters.forEach(function(filter) {
+                filter.style.display = 'none';
+            });
+        });
+    </script>
+{% endblock %}
